@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    </div>
+    <div>
+        <h1> Matrix Multiplication</h1>
+        <form onsubmit="getinput(); return false">
+
+            <input type="number" min="2" id="getinput1" placeholder="Matrix 1" required>
+            <input type="number" min="2" id="getinput2" placeholder="Matrix 2" required>
+            <button type="submit">Check</button>
+
+        </form><br><br>
+    </div>
+    <div>
+        <form onsubmit="multiply(); return false" id="onsubmitform">
+            <div id="matrix1"></div>
+            <div id="matrix2"></div><br>
+            <button>Multiply</button><br>
+            <div id="resultmatrix"></div>
+
+        </form>
+
+
+    <script>
+                document.getElementById("onsubmitform").style.visibility = "hidden";
+        let value1 = "";
+        let value2 = "";
+        
+        let matrix1 = document.querySelector("#matrix1");
+        let matrix2 = document.querySelector("#matrix2");
+        let resultmatrix = document.querySelector("#resultmatrix");
+        function getinput() {
+
+
+            matrix1.innerHTML = " ";
+            matrix2.innerHTML = " ";
+            resultmatrix.innerHTML = " ";
+
+            value1 = document.querySelector("#getinput1").value;
+            value2 = document.querySelector("#getinput2").value;
+
+            if (value1 !== value2) {
+                alert("Matrix value must be same");
+                return;
+            }
+
+            for (let i = 0; i < value1; i++) {
+                for (let j = 0; j < value2; j++) {
+                    matrix1.innerHTML +=
+                    `<input class="m1${i} m1${j}" id="m1${i}${j}" placeholder="0" type="number">`;
+                    matrix2.innerHTML +=
+                    `<input class="m2${i} m2${j}" id="m2${i}${j}"  placeholder="0" type="number">`;
+                    resultmatrix.innerHTML +=
+                        `<input class="m3${i} m3${j}" id="m3${i}${j}"  readonly placeholder="0" type="number">`;
+                }
+                matrix1.innerHTML += `<br>`;
+                matrix2.innerHTML += `<br>`;
+                resultmatrix.innerHTML += `<br>`;
+            }
+            document.getElementById("onsubmitform").style.visibility = "visible";
+        }
+
+        function multiply() {
+
+            let multiply1 = [];
+            let multiply2 = [];
+            let multiply3=[];
+            for (let i = 0; i < value1; i++) {
+                for (let j = 0; j < value2; j++) {
+                    let m1value = +document.querySelector(`#m1${i}${j}`).value;
+                    let m2value = +document.querySelector(`#m2${i}${j}`).value;
+                    multiply1.push(m1value);
+                    multiply2.push(m2value);
+                    
+                }
+            }
+            for (let i = 0; i < value1; i++) {
+                for (let j = 0; j < value2; j++) {
+                    let m3value = 0;
+                    for (let k = 0; k < value1; k++) {
+                        m3value += multiply1[i * value1 + k] * multiply2[k * value2 + j];
+                    }
+                    multiply3.push(m3value);
+                }
+            }
+            for (let i = 0; i < value1; i++) {
+                for (let j = 0; j < value2; j++) {
+                    document.querySelector(`#m3${i}${j}`).value = multiply3[i * value1 + j];
+                }
+            }
+            
+        }
+    </script>
+    <style>
+        div {
+    text-align: center;
+}li{
+    padding: 15px;
+    list-style-type: none;
+}
+a{
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 15px;
+    color: rgb(139, 25, 25);
+    background-color:rgb(0, 0, 0);
+    text-decoration: none;
+}a:hover{
+    border: 2px solid rgb(50, 141, 47);
+    color: rgb(46, 133, 148);
+    background-color: rgb(62, 41, 80);
+}
+
+#matrix1,
+#matrix2,
+#resultmatrix {
+    border: 1px solid rgb(107, 53, 53);
+    border-radius: 15x; 
+    padding: 15px;
+    margin: 13px;
+    display: inline-block;
+}
+
+#matrix1>input,
+#matrix2>input,
+#resultmatrix>input,#getinput1,#getinput2 {
+    border: 1px solid  #34a77b;
+    text-align: center;
+    line-height: 3.5;
+    padding: 12px;
+    margin: 0px;
+   
+}
+body {
+    background-color: #7b9229;
+    font-family:Arial, Helvetica, sans-serif ;
+}
+
+button ,a{
+    background-color: rgb(89, 95, 30);
+    color: rgba(255, 255, 255, 0.644);
+    border: 1px solid rgb(80, 51, 51);
+}
+
+button:hover ,a:hover {
+    border: 2px solid rgb(83, 29, 67);
+    color: rgba(255, 255, 255, 0.267);
+    background-color: rgb(50, 53, 27);
+}
+li{
+    list-style: none;
+    padding: 15px;
+    margin-top: 15px;
+}
+a{
+    margin-right: 80px;
+    text-decoration: none;
+    padding: 15px;
+}
+    </style>
+</body>
+</html>
